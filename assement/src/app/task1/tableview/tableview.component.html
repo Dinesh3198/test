@@ -1,0 +1,77 @@
+<div class="row Margin-1">
+    <div class="col-md-12">
+        <h5 class="element-header">Table List</h5>
+    </div>
+    <div class="card __layout">
+        <div class="card-body">
+            <div class="col-md-12">
+                <button type="button" class="btn  pull-right" (click)="btnNav_to_New()"
+                    style="background-color:#5f93d8!important;margin-right: 1rem;color: #fff;font-size: 15px;">Add
+                    New</button>
+            </div>
+            <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [dataSource]="Table_Source" [showBorders]="true">
+                <dxo-paging [pageSize]="8"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+                </dxo-pager>
+                <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+                <dxi-column dataField="firstName" [allowSearch]="true" dataType="string" caption="First Name">
+                </dxi-column>
+                <dxi-column dataField="lastName" [allowSearch]="true" dataType="string" caption="Last Name">
+                </dxi-column>
+                <dxi-column dataField="phoneNumber" [allowSearch]="false" [allowHeaderFiltering]="true"
+                    dataType="Number" caption="Phone Number"></dxi-column>
+                <dxi-column dataField="qualification" [allowSearch]="true" [allowHeaderFiltering]="true"
+                    dataType="string" caption="Qualification"></dxi-column>
+                <dxi-column dataField="city" [allowSearch]="true" [allowHeaderFiltering]="true" dataType="string"
+                    caption="City"></dxi-column>
+                <dxi-column dataField="email" [allowSearch]="true" dataType="string" caption="Email"></dxi-column>
+                <dxi-column caption="Edit" cellTemplate="Edit_User" [allowSearch]="true" dataType="button"></dxi-column>
+                <dxi-column caption="Delete" cellTemplate="Delte_User" [allowSearch]="true" dataType="button">
+                </dxi-column>
+                <dxi-column caption="View" cellTemplate="View_User" [allowSearch]="true" dataType="button"></dxi-column>
+                <div *dxTemplate="let id of 'Edit_User'">
+                    <span style="padding-right: 5px;word-break: keep-all; cursor: pointer;"
+                        (click)="btnNav_to_Edit(id.data._id)" class="badge badge-info"
+                        style="font-weight: bold;">Edit</span>
+                </div>
+                <div *dxTemplate="let id of 'Delte_User'">
+                    <span style="padding-right: 5px;word-break: keep-all; cursor: pointer;"
+                        (click)="btnNav_to_Delete(id.data._id)" class="badge badge-danger"
+                        style="font-weight: bold;">Delete</span>
+                </div>
+                <div *dxTemplate="let id of 'View_User'">
+                    <span style="padding-right: 5px;word-break: keep-all; cursor: pointer;"
+                        (click)="btnNav_to_View(id.data._id)" class="badge badge-secondary"
+                        style="font-weight: bold;">View</span>
+                </div>
+            </dx-data-grid>
+  
+  <!-- Modal -->
+  <ng-template #deletePopup>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    </div>
+  </ng-template>
+
+  <ng-template #viewtemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">View List</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <label>First Name:</label>&nbsp;<label>{{view_data?.firstName}}</label><br>
+    <label>Last Name:</label>&nbsp;<label>{{view_data?.lastName}}</label><br>
+    <label>Email:</label>&nbsp;<label>{{view_data?.email}}</label><br>
+    <label>Phone Number:</label>&nbsp;<label>{{view_data?.phoneNumber}}</label><br>
+    </div>
+  </ng-template>
+ </div>
+    </div>
+</div>

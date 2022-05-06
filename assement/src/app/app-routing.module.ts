@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'task2', loadChildren: () => import('./task2/task2.module').then(m => m.Task2Module) },
   {
     path: '',
-    redirectTo: '/Pages',
+    redirectTo: '/Pages/task1',
     pathMatch: 'full'
   },
 ];
